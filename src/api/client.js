@@ -2,14 +2,16 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-const API_URL = 'http://localhost:8080/api';
+// 🔥 MODIFICATION 1 : Utilisation de la variable d'environnement pour la production
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
 
 const client = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 30000,
+  // 🔥 MODIFICATION 2 : Timeout passé à 60s (60000) car Render met du temps à se réveiller
+  timeout: 60000, 
 });
 
 // Intercepteur pour ajouter le token JWT
